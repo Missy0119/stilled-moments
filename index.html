@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的摄影作品集 - 支持竖版</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <div id="custom-cursor"></div>
+    <section class="hero">
+        <div class="hero-bg" id="hero-bg-layer"></div>
+        <div class="hero-overlay"></div>
+
+        <div class="content">
+            <span class="author-name">PHOTOGRAPHY BY Chaoying</span>
+            <h1>Stilled Moments</h1>
+            <p>At the heart of the image. The camera is my language -- every word I speak is "seeing".</p>
+            <p>当记忆缓慢生长成一层潮湿的雾，那些被定格的记忆，被尘封的悸动，在旧时的光影再次被翻起时，流淌于心</p>
+            <button onclick="showGallery()">Discover More</button>
+        </div>
+
+        <div class="main-photo-container">
+            <img id="main-foreground-image" src="./image/d22bf0eccbd9d226a9e32bcaa90e3718.JPG" alt="摄影作品">
+        </div>
+
+        <div class="slider">
+            <img src="./image/d22bf0eccbd9d226a9e32bcaa90e3718.JPG" class="thumbnail active"
+                onclick="changeImage('./image/d22bf0eccbd9d226a9e32bcaa90e3718.JPG', this)">
+
+            <img src="./image/DSC_2416.JPG" class="thumbnail" onclick="changeImage('./image/DSC_2416.JPG', this)">
+
+            <img src="./image/DSC_0159.JPG" class="thumbnail" onclick="changeImage('./image/DSC_0159.JPG', this)">
+        </div>
+    </section>
+    <section id="gallery-section"
+        style="display: none; padding: 40px 5%; background-color: #f4f1ea; min-height: 100vh;">
+        <header class="filter-header">
+            <div class="city-filters">
+                <!-- 给每个按钮加上 data-filter 隐形标签 -->
+                <span class="active" data-filter="全部" data-music="./music/obj_w5rDlsOJwrLDjj7CmsOj_7421431844_29de_b688_ad4a_2fd8bd4b67f32de6f9824b5470ca191c.m4a">全部</span>
+                <span data-filter="江水绿如蓝" data-music="./music/inordina.m4a">江水绿如蓝</span>
+                <span data-filter="入帘青" data-music="./music/月满西楼.m4a">入帘青</span>
+                <span data-filter="半夏生" data-music="./music/counter attack-半夏生.m4a">半夏生</span>
+                <span data-filter="斗芳菲" data-music="./music/past lives.m4a">斗芳菲</span>
+                <span data-filter="橙黄橘赫时" data-music="./music/one more light.mp3">橙黄橘赫时</span>
+                <span data-filter="千秋雪" data-music="./music/山鬼.m4a">千秋雪</span>
+                <span data-filter="万里沙" data-music="./music/the earth prelude.m4a">万里沙</span>
+                <span data-filter="黑云翻墨" data-music="./music/solitude—黑云翻墨.m4a">黑云翻墨</span>
+                <span data-filter="灯火阑珊处" data-music="./music/miss me—灯火.m4a">灯火阑珊处</span>
+                <span data-filter="远上白云间" data-music="./music/sleeptalking-白云间.m4a">远上白云间</span>
+                <span data-filter="帘卷西风" data-music="./music/magnolia-帘卷西风.m4a">帘卷西风</span>
+            </div>
+        </header>
+
+        <!-- 2. 补回瀑布流的“开门”大盒子 -->
+        <main class="masonry-gallery">
+            <div class="gallery-item" data-category="入帘青">
+                <img src="./image/d22bf0eccbd9d226a9e32bcaa90e3718.JPG" alt="江心屿">
+                <div class="item-info">
+                    <div class="item-header">
+                        <span class="item-title">春和景明</span>
+                        <span class="item-location">温州 / 江心屿</span>
+                    </div>
+                    <div class="item-camera">IPHONE 16 PRO</div>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-category="橙黄橘赫时">
+                <img src="./image/e9f6f34188149a134708914e043044d6.JPG" alt="江心屿">
+                <div class="item-info">
+                    <div class="item-header">
+                        <span class="item-title">江心屿</span>
+                        <span class="item-location">温州</span>
+                    </div>
+                    <div class="item-camera">IPHONE 16 PRO</div>
+                </div>
+            </div>
+            <div class="gallery-item" data-category="入帘青">
+                <img src="./image/edb121de47ddee387bfb7772bbc5cf35.JPG" alt="江心屿">
+                <div class="item-info">
+                    <div class="item-header">
+                        <span class="item-title">east meets west</span>
+                        <span class="item-location">温州 / 江心屿</span>
+                    </div>
+                    <div class="item-camera">IPHONE 16 PRO</div>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-category="黑云翻墨">
+                <img src="./image/DSC_0159.JPG" alt="转角">
+                <div class="item-info">
+                    <div class="item-header">
+                        <span class="item-title">转角</span>
+                        <span class="item-location">香港</span>
+                    </div>
+                    <div class="item-camera">Nikon Z502</div>
+                </div>
+            </div>
+            <div class="gallery-item" data-category="黑云翻墨">
+                <img src="./image/DSC_0172.JPG" alt="转角">
+                <div class="item-info">
+                    <div class="item-header">
+                        <span class="item-title">转角</span>
+                        <span class="item-location">香港</span>
+                    </div>
+                    <div class="item-camera">Nikon Z502</div>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-category="橙黄橘赫时">
+                <img src="./image/DSC_0105.JPG" alt="心诚则灵">
+                <div class="item-info">
+                    <div class="item-header">
+                        <span class="item-title">心诚则灵</span>
+                        <span class="item-location">香港 / 文武庙</span>
+                    </div>
+                    <div class="item-camera">Nikon Z502</div>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-category="橙黄橘赫时">
+                <img src="./image/DSC_0109.JPG" alt="文武庙">
+                <div class="item-info">
+                    <div class="item-header">
+                        <span class="item-title">文武庙</span>
+                        <span class="item-location">香港</span>
+                    </div>
+                    <div class="item-camera">Nikon Z502</div>
+                </div>
+            </div>
+            <div class="gallery-item" data-category="灯火阑珊处">
+                <img src="./image/IMG_2016.jpg" alt="灯火">
+                <div class="item-info">
+                    <div class="item-header">
+                        <span class="item-title">灯火</span>
+                        <span class="item-location">香港</span>
+                    </div>
+                    <div class="item-camera">Nikon Z502</div>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-category="万里沙">
+                <img src="./image/E7B0C375-27BB-4183-80CA-32AABEE92E7D_1_201_a.jpeg" alt="山脉">
+                <div class="item-info">
+                    <div class="item-header">
+                        <span class="item-title">山脉</span>
+                        <span class="item-location">过客</span>
+                    </div>
+                    <div class="item-camera">Nikon Z502</div>
+                </div>
+            </div>
+            <div class="gallery-item" data-category="入帘青">
+                <img src="./image/DSC_1090.JPG" alt="雪山与经幡">
+                <div class="item-info">
+                    <div class="item-header">
+                        <span class="item-title">慕斯蛋糕</span>
+                        <span class="item-location">过客</span>
+                    </div>
+                    <div class="item-camera">Nikon Z502</div>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-category="万里沙">
+                <img src="./image/DSC_1177.JPG" alt="雪山与经幡">
+                <div class="item-info">
+                    <div class="item-header">
+                        <span class="item-title">河流三角洲</span>
+                        <span class="item-location">过客</span>
+                    </div>
+                    <div class="item-camera">Nikon Z502</div>
+                </div>
+            </div>
+            <div class="gallery-item" data-category="万里沙">
+                <img src="./image/DSC_1976.JPG" alt="雪山与经幡">
+                <div class="item-info">
+                    <div class="item-header">
+                        <span class="item-title">旷野</span>
+                        <span class="item-location">新疆 / 五彩池</span>
+                    </div>
+                    <div class="item-camera">Nikon Z502</div>
+                </div>
+            </div>
+            <div class="gallery-item" data-category="江水绿如蓝">
+                <img src="./image/DSC_2446.JPG" alt="河流">
+                <div class="item-info">
+                    <div class="item-header">
+                        <span class="item-title">河流</span>
+                        <span class="item-location">新疆/ 喀纳斯</span>
+                    </div>
+                    <div class="item-camera">Nikon Z502</div>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-category="江水绿如蓝">
+                <img src="./image/DSC_2416.JPG" alt="思绪">
+                <div class="item-info">
+                    <div class="item-header">
+                        <span class="item-title">思绪</span>
+                        <span class="item-location">新疆/ 喀纳斯</span>
+                    </div>
+                    <div class="item-camera">Nikon Z502</div>
+                </div>
+            </div>
+            <div class="gallery-item" data-category="江水绿如蓝">
+                <img src="./image/IMG_1815.JPG" alt="月亮湾">
+                <div class="item-info">
+                    <div class="item-header">
+                        <span class="item-title">月亮湾</span>
+                        <span class="item-location">新疆/ 喀纳斯</span>
+                    </div>
+                    <div class="item-camera">iphone16 pro</div>
+                </div>
+            </div>
+            <div class="gallery-item" data-category="入帘青">
+                <img src="./image/IMG_0406.JPG" alt="夏之荫">
+                <div class="item-info">
+                    <div class="item-header">
+                        <span class="item-title">夏之荫</span>
+                        <span class="item-location">广州 / 兰圃</span>
+                    </div>
+                    <div class="item-camera">Nikon Z502</div>
+                </div>
+            </div>
+            <div class="gallery-item" data-category="入帘青">
+                <img src="./image/IMG_0403.JPG" alt="雪山与经幡">
+                <div class="item-info">
+                    <div class="item-header">
+                        <span class="item-title">茅舍</span>
+                        <span class="item-location">广州 / 兰圃</span>
+                    </div>
+                    <div class="item-camera">Nikon Z502</div>
+                </div>
+            </div>
+            <div class="gallery-item" data-category="江水绿如蓝">
+                <img src="./image/DSC_5113.JPG" alt="九寨沟">
+                <div class="item-info">
+                    <div class="item-header">
+                        <span class="item-title">九寨沟</span>
+                        <span class="item-location">四川 / 阿坝州</span>
+                    </div>
+                    <div class="item-camera">Nikon Z502</div>
+                </div>
+            </div>
+            <div class="gallery-item" data-category="斗芳菲">
+                <img src="./image/DSC_5322 4.JPG" alt="雪山与经幡">
+                <div class="item-info">
+                    <div class="item-header">
+                        <span class="item-title">绿映红</span>
+                        <span class="item-location">四川 / 阿坝州</span>
+                    </div>
+                    <div class="item-camera">Nikon Z502</div>
+                </div>
+            </div>
+            <div class="gallery-item" data-category="橙黄橘赫时">
+                <img src="./image/DSC_5198 2.JPG" alt="瀑布">
+                <div class="item-info">
+                    <div class="item-header">
+                        <span class="item-title">九寨沟瀑布</span>
+                        <span class="item-location">四川 / 阿坝州</span>
+                    </div>
+                    <div class="item-camera">Nikon Z502</div>
+                </div>
+            </div>
+            <div class="gallery-item" data-category="千秋雪">
+                <img src="./image/DSC_5699.JPG" alt="雪山">
+                <div class="item-info">
+                    <div class="item-header">
+                        <span class="item-title">黄龙</span>
+                        <span class="item-location">四川 / 阿坝州</span>
+                    </div>
+                    <div class="item-camera">Nikon Z502</div>
+                </div>
+            </div>
+            <div class="gallery-item" data-category="千秋雪">
+                <img src="./image/DSC_5585.JPG" alt="雪山">
+                <div class="item-info">
+                    <div class="item-header">
+                        <span class="item-title">黄龙</span>
+                        <span class="item-location">四川 / 阿坝州</span>
+                    </div>
+                    <div class="item-camera">Nikon Z502</div>
+                </div>
+            </div>
+            <div class="gallery-item" data-category="江水绿如蓝">
+                <img src="./image/DSC_5623.JPG" alt="雪山与经幡">
+                <div class="item-info">
+                    <div class="item-header">
+                        <span class="item-title">黄龙</span>
+                        <span class="item-location">四川 / 阿坝州</span>
+                    </div>
+                    <div class="item-camera">Nikon Z502</div>
+                </div>
+            </div>
+            <div class="gallery-item" data-category="黑云翻墨">
+                <img src="./image/b1572e198d1973ca9b9a3d93c076008c 2.jpg" alt="雪山与经幡">
+                <div class="item-info">
+                    <div class="item-header">
+                        <span class="item-title">西江千户苗寨</span>
+                        <span class="item-location">贵州 / 黔东南</span>
+                    </div>
+                    <div class="item-camera">iphone12</div>
+                </div>
+            </div>
+            <div class="gallery-item" data-category="入帘青">
+                <img src="./image/5c71b2e8a4fa3a01d9f8cfab1a8734fc.jpg" alt="风雨桥">
+                <div class="item-info">
+                    <div class="item-header">
+                        <span class="item-title">风雨桥</span>
+                        <span class="item-location">贵州 / 黔东南</span>
+                    </div>
+                    <div class="item-camera">iphone12</div>
+                </div>
+            </div>
+            <div class="gallery-item" data-category="远上白云间">
+                <img src="./image/db2768d770c69fffce0b125910313474.JPG" alt="雪山与经幡">
+                <div class="item-info">
+                    <div class="item-header">
+                        <span class="item-title">bay</span>
+                        <span class="item-location">Thailand / Pattaya</span>
+                    </div>
+                    <div class="item-camera">iphone12</div>
+                </div>
+            </div>
+            <div class="gallery-item" data-category="橙黄橘赫时">
+                <img src="./image/fca31a1669e4a08eaca32f046e776b.jpg" alt="转角">
+                <div class="item-info">
+                    <div class="item-header">
+                        <span class="item-title">转角</span>
+                        <span class="item-location">Thailand / Pattaya</span>
+                    </div>
+                    <div class="item-camera">iphone12</div>
+                </div>
+            </div>
+            <div class="gallery-item" data-category="斗芳菲">
+                <img src="./image/3d1d744f9bb1f37008dc62438e7af0.JPG" alt="花木">
+                <div class="item-info">
+                    <div class="item-header">
+                        <span class="item-title">花木</span>
+                        <span class="item-location">Thailand / Pattaya</span>
+                    </div>
+                    <div class="item-camera">iphone12</div>
+                </div>
+            </div>
+            <div class="gallery-item" data-category="半夏生">
+                <img src="./image/IMG_2042.jpg" alt="晴日">
+                <div class="item-info">
+                    <div class="item-header">
+                        <span class="item-title">晴日</span>
+                        <span class="item-location">Singapore</span>
+                    </div>
+                    <div class="item-camera">iphone X</div>
+                </div>
+            </div>
+            <div class="gallery-item" data-category="帘卷西风">
+                <img src="./image/IMG_2055.jpg" alt="晴日">
+                <div class="item-info">
+                    <div class="item-header">
+                        <span class="item-title">窗</span>
+                        <span class="item-location">Singapore / Cloud Forest</span>
+                    </div>
+                    <div class="item-camera">iphone X</div>
+                </div>
+            </div>
+            <div class="gallery-item" data-category="半夏生">
+                <img src="./image/IMG_2061 3.jpg" alt="梦">
+                <div class="item-info">
+                    <div class="item-header">
+                        <span class="item-title">梦</span>
+                        <span class="item-location">Singapore / Sentosa</span>
+                    </div>
+                    <div class="item-camera">iphone X</div>
+                </div>
+            </div>
+            <div class="gallery-item" data-category="半夏生">
+                <img src="./image/IMG_2041.jpg" alt="有爱的一家">
+                <div class="item-info">
+                    <div class="item-header">
+                        <span class="item-title">有爱的一家</span>
+                        <span class="item-location">Singapore / Gardens by the Bay</span>
+                    </div>
+                    <div class="item-camera">iphone X</div>
+                </div>
+            </div>
+            <div class="gallery-item" data-category="半夏生">
+                <img src="./image/IMG_2043.jpg" alt="楼台倒影池塘中">
+                <div class="item-info">
+                    <div class="item-header">
+                        <span class="item-title">楼台倒影池塘中</span>
+                        <span class="item-location">Singapore / ArtScience Museum</span>
+                    </div>
+                    <div class="item-camera">iphone X</div>
+                </div>
+            </div>
+        </main>
+    </section>
+
+    <!-- 新增：照片大图详情展示页 (默认隐藏) -->
+    <!-- 注意：这里使用了 class="hero"，完美复用了你封面的高级排版样式 -->
+    <section id="detail-section" class="hero" style="display: none;">
+        <div class="hero-bg" id="detail-bg-layer"></div>
+        <div class="hero-overlay"></div>
+
+        <div class="content">
+            <span class="author-name" id="detail-camera">CAMERA INFO</span>
+            <h1 id="detail-title">Photo Title</h1>
+            <p id="detail-location">Location</p>
+
+            <button onclick="closeDetail()">← back</button>
+        </div>
+
+        <div class="main-photo-container">
+            <img id="detail-main-image" src="" alt="摄影作品详情">
+        </div>
+
+        <div class="slider" style="opacity: 0; pointer-events: none; width: 130px;"></div>
+    </section>
+
+    <!-- 第一步：先加载音频播放器和控制按钮 -->
+    <audio id="bg-music" loop>
+        <source src="./music/obj_w5rDlsOJwrLDjj7CmsOj_7421431844_29de_b688_ad4a_2fd8bd4b67f32de6f9824b5470ca191c.m4a"
+            type="audio/mp4">
+        您的浏览器不支持音频播放。
+    </audio>
+
+    <!-- 修复了缺失的 > 符号 -->
+    <button id="music-toggle" class="music-btn" onclick="toggleMusic()">🎵 Play Music</button>
+
+    <!-- 第二步：最后加载 JavaScript 代码（紧挨着 </body> 的上方） -->
+
+</body>
+
+</html>

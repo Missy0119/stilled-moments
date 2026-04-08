@@ -1,0 +1,473 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #111;
+    /* 给个深色底色作为基础 */
+    /* 已经删除了 overflow: hidden; 解除了全局滚动锁定 */
+}
+
+/* 主容器 */
+.hero {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5%;
+}
+
+/* 1. 模糊背景层 */
+.hero-bg {
+    position: absolute;
+    /* 将背景稍微放大一点，防止模糊边缘漏出底色 */
+    top: -5%;
+    left: -5%;
+    width: 110%;
+    height: 110%;
+    background-image: url('https://images.unsplash.com/photo-1611244419377-b0a760c19719?q=80&w=1964');
+    background-size: cover;
+    background-position: center;
+    filter: blur(25px);
+    /* 核心：高斯模糊效果 */
+    z-index: 0;
+    transition: background-image 0.5s ease-in-out;
+}
+
+/* 2. 深色遮罩层，让前景更突出 */
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    /* 60% 透明度的黑色 */
+    z-index: 1;
+}
+
+/* 确保内容层在背景和遮罩之上 */
+.content,
+.slider,
+.main-photo-container {
+    position: relative;
+    z-index: 2;
+}
+
+/* 左侧内容区样式（保持不变） */
+.content {
+    color: white;
+    max-width: 400px;
+}
+
+.content h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.content p {
+    font-size: 1rem;
+    margin-bottom: 30px;
+    line-height: 1.6;
+    color: #ccc;
+}
+
+.content button {
+    padding: 10px 25px;
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.content button:hover {
+    background: white;
+    color: black;
+}
+
+/* --- 新增：中间的前景清晰大图容器 --- */
+.main-photo-container {
+    flex: 1;
+    /* 占据中间所有剩余空间 */
+    height: 85vh;
+    /* 限制最大高度，留出上下边距 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 40px;
+}
+
+.main-photo-container img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    /* 核心：完整包含图片，绝不裁剪！竖版横版通吃 */
+    border-radius: 8px;
+    /* 轻微的圆角 */
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+    /* 添加阴影，增加立体感 */
+}
+
+/* 右侧缩略图轮播区样式（稍微调整为垂直排列更配竖版） */
+.slider {
+    display: flex;
+    flex-direction: column;
+    /* 改为垂直排列缩略图 */
+    gap: 15px;
+}
+
+.thumbnail {
+    width: 80px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+    cursor: pointer;
+    opacity: 0.5;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.thumbnail:hover,
+.thumbnail.active {
+    opacity: 1;
+    transform: translateX(-10px);
+    /* 悬停时向左微微浮动 */
+}
+
+.thumbnail.active {
+    border-color: white;
+}
+
+/* --- 新增：摄影师名字的专属高级排版 --- */
+.content .author-name {
+    display: block;
+    font-size: 0.85rem;
+    /* 较小的精致字号 */
+    letter-spacing: 4px;
+    /* 宽阔的字间距，这是提升高级感的秘诀！ */
+    text-transform: uppercase;
+    /* 自动转换为全大写字母 */
+    color: #dcd7cb;
+    /* 使用偏暖的浅灰偏金色，显得低调有内涵 */
+    margin-bottom: 15px;
+    /* 和下方大标题拉开一点呼吸感间距 */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+/* --- 音乐控制按钮样式 --- */
+.music-btn {
+    position: fixed;
+    /* 固定在屏幕上 */
+    bottom: 30px;
+    /* 距离底部 30 像素 */
+    right: 30px;
+    /* 距离右侧 30 像素 */
+    z-index: 9999;
+    /* 确保它永远在最上层 */
+    background: transparent;
+    color: #dcd7cb;
+    /* 使用咱们之前定的低调浅灰金色 */
+    border: 1px solid #dcd7cb;
+    padding: 8px 18px;
+    border-radius: 30px;
+    /* 优雅的圆角 */
+    cursor: pointer;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    mix-blend-mode: difference;
+    /* 配合之前的特效，确保在任何背景下都能看清 */
+}
+
+.music-btn:hover {
+    background: rgba(220, 215, 203, 0.2);
+    color: #ffffff;
+    border-color: #ffffff;
+}
+
+
+/* --- 搬运自 gallery.html 的瀑布流与古典样式 --- */
+
+/* 顶部导航与分类过滤区 */
+.filter-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.city-filters {
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+
+    /* 现代 Flexbox 布局 */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px 30px;
+
+    /* --- 核心修复魔法：限制宽度强制换行 --- */
+    max-width: 900px;
+    /* 限制最大宽度，你可以根据喜好调大或调小这个数字 */
+    margin: 0 auto 40px auto;
+    /* 保证这个盒子在页面正中间，且底部留有 40px 的呼吸空间 */
+}
+
+.city-filters span {
+    /* 注意：删除了原来的 margin，使用上面的 gap 统一管理间距 */
+    cursor: pointer;
+    color: #8a8377;
+    transition: color 0.3s ease;
+
+    /* --- 核心修复：强制标签内的文字不换行 --- */
+    white-space: nowrap;
+}
+
+.city-filters span.active {
+    color: #3b3631;
+    font-weight: bold;
+    border-bottom: 2px solid #8c6f56;
+    padding-bottom: 5px;
+}
+
+.tag-filters {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.tag-filters span {
+    padding: 6px 20px;
+    border-radius: 30px;
+    font-size: 0.9rem;
+    cursor: none;
+    color: #8a8377;
+    border: 1px solid #dcd7cb;
+    transition: all 0.3s ease;
+}
+
+.tag-filters span.active,
+.tag-filters span:hover {
+    background-color: #3b3631;
+    color: #f4f1ea;
+    border-color: #3b3631;
+}
+
+/* 瀑布流画廊网格 (3列) */
+.masonry-gallery {
+    column-count: 3;
+    column-gap: 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.gallery-item {
+    background-color: #ffffff;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    overflow: hidden;
+    break-inside: avoid;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+    transition: transform 0.3s ease;
+    cursor: none;
+}
+
+.gallery-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.gallery-item img {
+    width: 100%;
+    display: block;
+    border-bottom: 1px solid #eee;
+}
+
+.item-info {
+    padding: 15px;
+}
+
+.item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 8px;
+}
+
+.item-title {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #3b3631;
+}
+
+.item-location {
+    font-size: 0.85rem;
+    color: #8a8377;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.item-camera {
+    font-size: 0.75rem;
+    color: #b0a99f;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* 响应式设计：在小屏幕上减少列数 */
+@media (max-width: 1024px) {
+    .masonry-gallery {
+        column-count: 3;
+    }
+}
+
+@media (max-width: 768px) {
+    .masonry-gallery {
+        column-count: 2;
+    }
+}
+
+@media (max-width: 480px) {
+    .masonry-gallery {
+        column-count: 1;
+    }
+}
+
+/* ========================================== */
+/* --- 变色小圆圈 (Custom Cursor) 专属样式 --- */
+/* ========================================== */
+#custom-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #dcd7cb;
+    /* 默认是优雅的空心圆 */
+    border-radius: 50%;
+    pointer-events: none;
+    /* 不阻挡鼠标点击 */
+    z-index: 10000;
+    /* 永远在最顶层 */
+    transform: translate(-50%, -50%);
+    /* 居中跟随 */
+    transition: width 0.3s ease, height 0.3s ease, background-color 0.3s ease;
+    mix-blend-mode: difference;
+    /* 遇到不同背景自动反色，非常高级 */
+}
+
+/* 当鼠标悬停在照片或按钮上时，圆圈变大并变成实心 */
+#custom-cursor.hover-active {
+    width: 40px;
+    height: 40px;
+    background-color: #dcd7cb;
+}
+
+/* 隐藏原本的手指鼠标，把控制权交给小圆圈 */
+.city-filters span,
+button,
+.thumbnail {
+    cursor: none;
+}
+
+/* ========================================== */
+/* --- 终极响应式修复：完美适配手机和小屏幕 --- */
+/* ========================================== */
+@media (max-width: 900px) {
+
+    /* 1. 大框架：从“左右排”变成“上下排” */
+    .hero {
+        flex-direction: column;
+        justify-content: flex-start;
+        padding: 20px 5%;
+        height: 100vh;
+        /* 严格锁定屏幕高度，防止乱跑 */
+    }
+
+    /* 2. 文字区：恢复左对齐，增加呼吸感，打造杂志级排版 */
+    .content {
+        text-align: left;
+        /* 核心：恢复左对齐 */
+        max-width: 100%;
+        padding: 0 15px;
+        /* 左右增加安全距离，不贴边 */
+        margin-top: 20px;
+        margin-bottom: 25px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        /* 确保按钮也乖乖靠左 */
+    }
+
+    .content .author-name {
+        font-size: 0.75rem;
+        letter-spacing: 3px;
+        /* 增加字母间距，提升高级感 */
+        margin-bottom: 12px;
+        color: #dcd7cb;
+    }
+
+    .content h1 {
+        font-size: 2.2rem;
+        /* 标题稍微放大一点点镇住气场 */
+        margin-bottom: 15px;
+        line-height: 1.2;
+    }
+
+    .content p {
+        font-size: 0.85rem;
+        line-height: 1.8;
+        /* 核心：拉大行高，让中文阅读更通透、有呼吸感 */
+        color: #cccccc;
+        margin-bottom: 15px;
+    }
+
+    .content button {
+        margin-top: 5px;
+        font-size: 0.85rem;
+        padding: 8px 22px;
+        /* 按钮稍微做得精致纤细一点 */
+    }
+
+    /* 3. 图片区：占据剩余的所有空间！图片最重要！ */
+    .main-photo-container {
+        flex: 1;
+        /* 霸道属性：剩下的屏幕空间全归我 */
+        width: 100%;
+        height: 0;
+        /* 让 flex 自动分配高度 */
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .main-photo-container img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+        /* 保证图片绝不被剪裁，完整显示 */
+    }
+
+    /* 4. 首页轮播缩略图：跑到最底下横着排 */
+    .slider {
+        flex-direction: row;
+        width: 100%;
+        justify-content: center;
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+
+    /* 5. 详情页里的那个隐形占位块：在手机上直接干掉，省出空间给图片 */
+    #detail-section .slider {
+        display: none !important;
+    }
+}
