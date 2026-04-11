@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>我的摄影作品集 - 支持竖版</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
 </head>
@@ -40,19 +43,22 @@
         style="display: none; padding: 40px 5%; background-color: #f4f1ea; min-height: 100vh;">
         <header class="filter-header">
             <div class="city-filters">
-                <!-- 给每个按钮加上 data-filter 隐形标签 -->
-                <span class="active" data-filter="全部" data-music="./music/obj_w5rDlsOJwrLDjj7CmsOj_7421431844_29de_b688_ad4a_2fd8bd4b67f32de6f9824b5470ca191c.m4a">全部</span>
-                <span data-filter="江水绿如蓝" data-music="./music/inordina.m4a">江水绿如蓝</span>
-                <span data-filter="入帘青" data-music="./music/月满西楼.m4a">入帘青</span>
-                <span data-filter="半夏生" data-music="./music/counter attack-半夏生.m4a">半夏生</span>
-                <span data-filter="斗芳菲" data-music="./music/past lives.m4a">斗芳菲</span>
-                <span data-filter="橙黄橘赫时" data-music="./music/one more light.mp3">橙黄橘赫时</span>
-                <span data-filter="千秋雪" data-music="./music/山鬼.m4a">千秋雪</span>
-                <span data-filter="万里沙" data-music="./music/the earth prelude.m4a">万里沙</span>
-                <span data-filter="黑云翻墨" data-music="./music/solitude—黑云翻墨.m4a">黑云翻墨</span>
-                <span data-filter="灯火阑珊处" data-music="./music/miss me—灯火.m4a">灯火阑珊处</span>
-                <span data-filter="远上白云间" data-music="./music/sleeptalking-白云间.m4a">远上白云间</span>
-                <span data-filter="帘卷西风" data-music="./music/magnolia-帘卷西风.m4a">帘卷西风</span>
+                <span class="active" data-filter="全部" data-hint="All Works"
+                    data-music="./music/obj_w5rDlsOJwrLDjj7CmsOj_7421431844_29de_b688_ad4a_2fd8bd4b67f32de6f9824b5470ca191c.m4a">全部</span>
+                <span data-filter="江水绿如蓝" data-hint="Rivers & Lakes" data-music="./music/inordina.m4a">江水绿如蓝</span>
+                <span data-filter="入帘青" data-hint="Greenery" data-music="./music/月满西楼.m4a">入帘青</span>
+                <span data-filter="半夏生" data-hint="Summer Vibes" data-music="./music/counter attack-半夏生.m4a">半夏生</span>
+                <span data-filter="斗芳菲" data-hint="Blooming" data-music="./music/past lives.m4a">斗芳菲</span>
+                <span data-filter="橙黄橘赫时" data-hint="Golden Hour" data-music="./music/one more light.mp3">橙黄橘赫时</span>
+                <span data-filter="千秋雪" data-hint="Snow" data-music="./music/山鬼.m4a">千秋雪</span>
+                <span data-filter="万里沙" data-hint="Deserts & Vistas"
+                    data-music="./music/the earth prelude.m4a">万里沙</span>
+                <span data-filter="黑云翻墨" data-hint="Overcast" data-music="./music/solitude—黑云翻墨.m4a">黑云翻墨</span>
+                <span data-filter="灯火阑珊处" data-hint="Night Cityscapes" data-music="./music/miss me—灯火.m4a">灯火阑珊处</span>
+                <span data-filter="远上白云间" data-hint="High Altitudes"
+                    data-music="./music/sleeptalking-白云间.m4a">远上白云间</span>
+                <span data-filter="帘卷西风" data-hint="Windows & Secrets"
+                    data-music="./music/magnolia-帘卷西风.m4a">帘卷西风</span>
             </div>
         </header>
 
@@ -84,6 +90,17 @@
                 <div class="item-info">
                     <div class="item-header">
                         <span class="item-title">east meets west</span>
+                        <span class="item-location">温州 / 江心屿</span>
+                    </div>
+                    <div class="item-camera">IPHONE 16 PRO</div>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-category="帘卷西风">
+                <img src="./image/IMG_1014.jpg" alt="江心屿">
+                <div class="item-info">
+                    <div class="item-header">
+                        <span class="item-title">浮光跃金</span>
                         <span class="item-location">温州 / 江心屿</span>
                     </div>
                     <div class="item-camera">IPHONE 16 PRO</div>
@@ -276,7 +293,7 @@
                 </div>
             </div>
             <div class="gallery-item" data-category="千秋雪">
-                <img src="./image/DSC_5585.JPG" alt="雪山">
+                <img src="./image/DSC_5585.jpg" alt="雪山">
                 <div class="item-info">
                     <div class="item-header">
                         <span class="item-title">黄龙</span>

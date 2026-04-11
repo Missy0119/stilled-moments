@@ -230,6 +230,34 @@ body {
     white-space: nowrap;
 }
 
+
+.city-filters span::after {
+    content: attr(data-hint);
+    /* 读取我们在 HTML 里写的英文字 */
+    position: absolute;
+    bottom: -22px;
+    /* 放在文字下方 */
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.65rem;
+    color: #b0a99f;
+    opacity: 0;
+    /* 默认完全透明隐藏 */
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+    /* 防止鼠标干扰 */
+    white-space: nowrap;
+    letter-spacing: 1px;
+    font-family: 'Segoe UI', sans-serif;
+    text-transform: uppercase;
+}
+
+/* 鼠标移上去时，透明度变1，且稍微往下沉一点点，极其优雅 */
+.city-filters span:hover::after {
+    opacity: 1;
+    transform: translateX(-50%) translateY(3px);
+}
+
 .city-filters span.active {
     color: #3b3631;
     font-weight: bold;
