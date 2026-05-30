@@ -526,12 +526,13 @@ button,
     }
 }
 
-/* Targets all images in your gallery */
-.masonry-gallery img {
-    width: 100%;
-    height: auto;
-    /* Tells the browser to reserve a 3x2 horizontal box */
-    aspect-ratio: 3 / 2; 
-    /* Optional: Adds a soft grey background box so users know an image is coming */
+.gallery-item img {
+    /* 1. Make the image fill the width of its column */
+    width: 100%; 
+    
+    /* 2. Tell the browser to calculate the height automatically based on the HTML attributes */
+    height: auto; 
+    
+    /* Optional: Keep your background color for loading */
     background-color: #e0dcd3; 
 }
