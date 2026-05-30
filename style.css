@@ -525,3 +525,13 @@ button,
         display: none !important;
     }
 }
+
+/* Targets all images in your gallery */
+.masonry-gallery img {
+    width: 100%;
+    height: auto;
+    /* Tells the browser to reserve a 3x2 horizontal box */
+    aspect-ratio: 3 / 2; 
+    /* Optional: Adds a soft grey background box so users know an image is coming */
+    background-color: #e0dcd3; 
+}
