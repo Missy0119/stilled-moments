@@ -1073,7 +1073,7 @@ editorial-img {
 
 /* 1. 强制外壳：左右布局，完美推开 */
 #detail-section {
-    display: flex !important;
+    /* display: flex !important;  <-- 把这行删掉，或者注释掉！ */
     flex-direction: row !important;
     align-items: center !important;
     padding: 0 8% !important; /* 左右保留 8% 呼吸空间 */
