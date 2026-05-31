@@ -991,73 +991,159 @@ editorial-img {
 }
 
 /* --- 1. 顶部摄影师名字 --- */
-/* --- 1. 顶部摄影师名字 --- */
-/* --- 1. 顶部摄影师名字 --- */
-.content .author-name {
+/* ========================================== */
+/* --- 首页首屏专属样式 (绝对隔离，保护详情页) --- */
+/* ========================================== */
+
+/* 1. 顶部摄影师名字 */
+#hero-content .author-name {
     display: block;
     font-size: 1rem;
-    letter-spacing: 3px; /* 修复：极大缩小字母间距，像第一张图那样紧凑 */
+    letter-spacing: 3px; 
     margin-bottom: 5px; 
     color: rgba(255, 255, 255, 0.55); /* 浓度：中等 */
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     text-transform: uppercase;
 }
 
-/* --- 2. 主标题 --- */
-.content h1 {
+/* 2. 主标题 (只有这里的 Stilled Moments 会变成镂空，文武庙安全了！) */
+#hero-content h1 {
     font-size: 7.5rem; 
     line-height: 1.1; 
     margin-bottom: 10px; 
     letter-spacing: 2px;
-    
-    /* 保持你之前要的镂空感，但把浓度拉到最高！ */
     color: transparent;
-    -webkit-text-stroke: 1.5px rgba(255, 255, 255, 1); /* 浓度：最高（100%纯白，且线条稍微加粗） */
+    -webkit-text-stroke: 1.5px rgba(255, 255, 255, 1); /* 浓度：最高 */
     text-shadow: none;
 }
-/* 💡注：如果你突然不想用透明线框字了，想变成第一张图那样完全实心的粗体字，只需把上面两行 color 和 -webkit... 删掉，写成 color: #ffffff; 即可 */
 
-/* --- 3. 中英文正文 --- */
-.content p {
+/* 3. 中英文正文 */
+#hero-content p {
     font-size: 1.1rem;
     line-height: 1.8;
     margin-bottom: 2px;
-    letter-spacing: 0px; /* 修复：去掉之前加的多余间距，恢复正常的阅读质感 */
-    color: rgba(255, 255, 255, 0.55); /* 浓度：最低（55%透明度），彻底退居二线，不抢风头 */
+    letter-spacing: 0px; 
+    color: rgba(255, 255, 255, 0.55); /* 浓度：最低，退居二线 */
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
-/* --- 4. 按钮外层间距 --- */
-.menu-options {
+/* 4. 按钮外层间距 */
+#hero-content .menu-options {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-top: 30px; 
 }
 
-/* --- 5. 纯净复刻版：经典胶囊幽灵按钮 --- */
-/* --- 5. 纯净复刻版：经典胶囊幽灵按钮 --- */
-.menu-options button {
+/* 5. 纯净复刻版：经典胶囊幽灵按钮 */
+#hero-content .menu-options button {
     background-color: transparent; 
-    color: rgba(255, 255, 255, 0.7)!important;
-    
-    /* 强制使用苹果等系统原生最干净的无衬线字体 */
+    color: rgba(255, 255, 255, 0.7); /* 字体颜色和边框保持一致 */
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
-    
     font-size: 1.15rem; 
-    font-weight: 400; /* 核心修改：恢复正常粗细，不要加粗 */
-    letter-spacing: 0px; /* 取消所有多余间距 */
-    
-    padding: 8px 20px; 
-    border: 1.5px solid rgba(255, 255, 255, 0.7); 
+    font-weight: 400; 
+    letter-spacing: 0px; 
+    padding: 12px 45px; /* 帮你调回了完美的扁长胶囊比例 */
+    border: 0.55px solid rgba(255, 255, 255, 0.7); /* 极细边框 */
     border-radius: 60px; 
     cursor: pointer;
-    text-transform: none; /* 保持 HTML 里写的大小写格式 */
+    text-transform: none; 
     transition: background-color 0.4s ease, color 0.4s ease; 
 }
 
 /* 按钮悬停特效 */
-.menu-options button:hover {
+#hero-content .menu-options button:hover {
     background-color: #ffffff;
     color: #000000;
+}
+
+/* ========================================== */
+/* --- 终极抢救：详情页 (大图浏览) 专属排版锁定 --- */
+/* ========================================== */
+
+/* 1. 强制外壳：必须是左右分开！ */
+/* ========================================== */
+/* --- 终极完美版：详情页 (大图浏览) 专属排版 --- */
+/* ========================================== */
+
+/* 0. 驱逐隐形元素，防止占位干扰 */
+#detail-section .slider {
+    display: none !important;
+}
+
+/* 1. 强制外壳：左右布局，完美推开 */
+#detail-section {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    padding: 0 8% !important; /* 左右保留 8% 呼吸空间 */
+}
+
+/* 2. 左侧文字区：锁死 35% 宽度，必须靠左 */
+#detail-section .content {
+    flex: 0 0 35% !important; 
+    max-width: 400px !important;
+    text-align: left !important; 
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+#detail-section .content h1 {
+    font-size: 3.5rem !important;
+    color: #ffffff !important; 
+    -webkit-text-stroke: 0 !important; 
+    text-shadow: none !important;
+    letter-spacing: 2px !important;
+    margin-bottom: 10px !important;
+    line-height: 1.2 !important;
+}
+
+#detail-section .content .author-name {
+    font-size: 0.85rem !important;
+    letter-spacing: 4px !important;
+    color: rgba(255, 255, 255, 0.8) !important;
+    margin-bottom: 8px !important;
+    display: block !important;
+}
+
+#detail-section .content p {
+    font-size: 1rem !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+    letter-spacing: 1px !important;
+}
+
+#detail-section .content button {
+    margin-top: 30px !important;
+    padding: 8px 25px !important;
+    font-size: 0.85rem !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.8) !important;
+    border-radius: 30px !important;
+    background: transparent !important;
+    color: #ffffff !important;
+    letter-spacing: 1px !important;
+    font-weight: 400 !important;
+}
+
+#detail-section .content button:hover {
+    background: #ffffff !important;
+    color: #000000 !important;
+}
+
+/* 3. 右侧图片区：占据剩下所有空间，并在空间内【居中】！ */
+#detail-section .main-photo-container {
+    flex: 1 !important; /* 核心1：霸占右边剩下的所有空间 */
+    height: 85vh !important;
+    display: flex !important;
+    justify-content: center !important; /* 核心2：让图片在这个空间里居中，而不是挤在最右边！ */
+    align-items: center !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+#detail-section .main-photo-container img {
+    max-width: 100% !important;
+    max-height: 100% !important;
+    object-fit: contain !important; 
+    border-radius: 6px !important;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5) !important;
 }
