@@ -10,38 +10,96 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
+
     <div id="custom-cursor"></div>
+
     <section class="hero">
-        <div class="hero-bg" id="hero-bg-layer"></div>
+        <div class="video-container">
+            <video id="loading-video" autoplay loop muted playsinline>
+                <source src="./image/1.MP4" type="video/mp4">
+            </video>
+            <video id="main-video" loop muted playsinline style="opacity: 0; transition: opacity 2s ease;">
+                <source src="./image/2.MP4" type="video/mp4">
+            </video>
+        </div>
+
         <div class="hero-overlay"></div>
 
-        <div class="content">
-            <span class="author-name">PHOTOGRAPHY BY Chaoying</span>
-            <h1>Stilled Moments</h1>
-            <p>At the heart of the image. The camera is my language -- every word I speak is "seeing".</p>
-            <p>当记忆缓慢生长成一层潮湿的雾，那些被定格的瞬间，被尘封的悸动，在旧时的光影再次被翻起时，流淌于心</p>
-            <button onclick="showGallery()">Discover More</button>
+        <div id="loading-screen">
+            <span class="loading-text">Loading...</span>
         </div>
 
-        <div class="main-photo-container">
-            <img id="main-foreground-image" src="./image/d22bf0eccbd9d226a9e32bcaa90e3718.JPG" alt="摄影作品">
-        </div>
-
-        <div class="slider">
-            <img src="./image/d22bf0eccbd9d226a9e32bcaa90e3718.JPG" class="thumbnail active"
-                onclick="changeImage('./image/d22bf0eccbd9d226a9e32bcaa90e3718.JPG', this)">
-
-            <img src="./image/DSC_2416.JPG" class="thumbnail" onclick="changeImage('./image/DSC_2416.JPG', this)">
-
-            <img src="./image/三千院.jpeg" class="thumbnail" onclick="changeImage('./image/三千院.jpeg', this)">
-            <img src="./image/稻荷.jpeg" class="thumbnail" onclick="changeImage('./image/稻荷.jpeg', this)">
+        <div class="content" id="hero-content" style="opacity: 0; pointer-events: none;">
+            <span class="author-name fade-item">PHOTOGRAPHY BY Chaoying</span>
+            <h1 class="fade-item">Stilled Moments</h1>
+            <p class="fade-item">At the heart of the image. The camera is my language -- every word I speak is "seeing".
+            </p>
+            <p class="fade-item">当记忆缓慢生长成一层潮湿的雾，那些被定格的瞬间，被尘封的悸动，在旧时的光影再次被翻起时，流淌于心</p>
+            <div class="menu-options fade-item">
+                <button onclick="showGallery()">Continue</button>
+            </div>
         </div>
     </section>
+
     <section id="gallery-section"
         style="display: none; padding: 40px 5%; background-color: #f4f1ea; min-height: 100vh;">
+
+        <div class="editorial-section">
+            <h2 class="editorial-title reveal-up">Light, Shadow<br>& the Silhouette</h2>
+
+            <div class="editorial-container">
+                <div class="editorial-image-wrapper reveal-up">
+                    <img src="./image/永观堂4.JPG" id="editorial-main-img" alt="Editorial Featured"
+                        class="editorial-img">
+                    <p class="image-caption" id="editorial-caption">PLATE I — STILL LIFE WITH LIGHT & SHADOW</p>
+
+                    <div class="editorial-thumbnails">
+                        <img src="./image/永观堂4.JPG" class="ed-thumb active"
+                            onclick="changeEditorialContent(this, './image/永观堂4.JPG', 'PLATE I — STILL LIFE WITH LIGHT & SHADOW', '01', '记忆会随风飘走吗？<br>我要如何留住这一刻呢，我不再回来的青春<br>我不知道自己是否还会再回来，也许永远不会<br>世界太大了，大到只够用一次快门来短暂挽留，就像旅行中遇到的人，匆匆相遇后便相忘于江湖<br>沿途的邂逅入了画，可是我空了一块的心又能和谁诉说')">
+
+                        <img src="./image/DSC_0159.JPG" class="ed-thumb"
+                            onclick="changeEditorialContent(this, './image/DSC_0159.JPG', 'PLATE II — AT THE CORNER', '02', '你挽着我穿梭在钢铁森林，走过旺角光怪陆离的街头，在叮叮车里看车水马龙掠过，我们在文武庙郑重落笔，期盼命运的垂怜...我害怕的从来不是离别，而是遗忘。<br>亲爱的朋友，当你来到香港，你会想起我吗')">
+
+                        <img src="./image/三千院.jpeg" class="ed-thumb"
+                            onclick="changeEditorialContent(this, './image/三千院.jpeg', 'PLATE III — KYOTO SANZEN-IN', '03', '这是第三张照片的说明文字。通过同步切换，每一张得意的作品都能配上它独一无二的故事', '— KYOTO SERIES')">
+
+                        <img src="./image/IMG_2042.jpg" class="ed-thumb"
+                            onclick="changeEditorialContent(this, './image/IMG_2042.jpg', 'PLATE IV — SINGAPORE', '04', '这是第四张照片的叙事。在这里写下你拍摄时的光影斑驳，让文字与摄影作品在杂志排版中完美交融。', '— NIKON Z502')">
+                    </div>
+                </div>
+
+                <div class="editorial-text-wrapper">
+                    <div class="quote-block reveal-up">
+                        <span class="quote-number" id="editorial-num">01</span>
+                        <p class="quote" id="editorial-quote">
+                            记忆会随风飘走吗？<br>我要如何留住这一刻呢，我不再回来的青春<br>我不知道自己是否还会再回来，也许永远不会<br>世界太大了，大到只够用一次快门来短暂挽留，就像旅行中遇到的人，匆匆相遇后便相忘于江湖<br>沿途的邂逅入了画，可是我空了一块的心又能和谁诉说</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <section class="cinematic-videos">
+
+            <div class="video-card reveal-up">
+                <video autoplay loop muted playsinline>
+                    <source src="./video/你的视频1.mp4" type="video/mp4">
+                </video>
+                <p class="video-caption">CHAPTER I — THE WHISPERING WIND</p>
+            </div>
+
+            <div class="video-card reveal-up">
+                <video autoplay loop muted playsinline>
+                    <source src="./video/你的视频2.mp4" type="video/mp4">
+                </video>
+                <p class="video-caption">CHAPTER II — ECHOES OF SILENCE</p>
+            </div>
+
+        </section>
+
         <header class="filter-header">
             <div class="city-filters">
                 <span class="active" data-filter="全部" data-hint="All Works" data-music="./music/oceans.m4a">全部</span>

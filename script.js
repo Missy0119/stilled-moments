@@ -1,3 +1,38 @@
+// --- 电影感开场：控制 Loading 与动画时间线 ---
+document.addEventListener('DOMContentLoaded', () => {
+    // 设定 Loading 持续时间 (这里设为 3.5 秒，你可以根据需要调整)
+    const loadingDuration = 4800; 
+
+    setTimeout(() => {
+        // 1. 隐藏 Loading 字样
+        const loadingScreen = document.getElementById('loading-screen');
+        loadingScreen.style.opacity = '0';
+        setTimeout(() => loadingScreen.style.display = 'none', 1000); // 1秒后彻底移出文档流
+
+        // 2. 视频无缝切换 (前导视频变透明，主视频显现并开始播放)
+        const video1 = document.getElementById('loading-video');
+        const video2 = document.getElementById('main-video');
+        video1.style.opacity = '0';
+        video2.style.opacity = '1';
+        video2.play();
+
+        // 3. 让主界面内容区可以被点击
+        const heroContent = document.getElementById('hero-content');
+        heroContent.style.opacity = '1';
+        heroContent.style.pointerEvents = 'auto';
+
+        // 4. 文字逐个浮现动画 (Staggered Animation)
+        const fadeItems = document.querySelectorAll('.fade-item');
+        fadeItems.forEach((item, index) => {
+            // 利用 index 制造时间差，比如第一个元素立刻显示，第二个等 0.2 秒...
+            setTimeout(() => {
+                item.classList.add('show');
+            }, index * 200); // 间隔 200 毫秒，你可以调大这个数值让动画更慢更连贯
+        });
+
+    }, loadingDuration);
+});
+
 // --- 1. 背景大图与缩略图切换逻辑 ---
 function changeImage(imageUrl, element) {
     const bgLayer = document.getElementById('hero-bg-layer');
@@ -184,3 +219,48 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+
+// --- 杂志风画报：点击缩略图切换大图逻辑 ---
+// --- 杂志风画报：点击缩略图切换大图逻辑 ---
+// --- 杂志风画报：点击缩略图切换大图逻辑 ---
+function changeEditorialContent(element, imgSrc, caption, num, quote, author) {
+    // 1. 切换左侧大图和底部的图注
+    document.getElementById('editorial-main-img').src = imgSrc;
+    document.getElementById('editorial-caption').innerText = caption;
+
+    // 2. 动态刷新右侧对应的编号和引言正文
+    document.getElementById('editorial-num').innerText = num;
+    // 👇 核心修改：去掉了包围在 quote 两边的双引号 👇
+    document.getElementById('editorial-quote').innerHTML = quote;
+
+    // 3. 更新缩略图的 active 高亮状态
+    const thumbs = document.querySelectorAll('.ed-thumb');
+    thumbs.forEach(thumb => {
+        thumb.classList.remove('active');
+    });
+    element.classList.add('active');
+}
+// --- 滚动浮现 (Scroll Reveal) 侦测逻辑 ---
+document.addEventListener('DOMContentLoaded', () => {
+    // 设置侦测雷达：当元素有 15% 进入屏幕视野时触发
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.15 
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // 元素进入视野，加上 active 类触发动画
+                entry.target.classList.add('active');
+                // 如果你希望滑上去再滑下来时动画不再重复，可以取消注释下面这行：
+                // observer.unobserve(entry.target); 
+            }
+        });
+    }, observerOptions);
+
+    // 找到页面上所有带有 reveal-up 类的元素，开始监视它们
+    const revealElements = document.querySelectorAll('.reveal-up');
+    revealElements.forEach(el => observer.observe(el));
+});
