@@ -61,20 +61,16 @@ body {
 
 /* 左侧内容区样式（保持不变） */
 .content {
-    color: white;
-    max-width: 400px;
-}
-
-.content h1 {
-    font-size: 3rem;
-    margin-bottom: 20px;
-}
-
-.content p {
-    font-size: 1rem;
-    margin-bottom: 30px;
-    line-height: 1.6;
-    color: #ccc;
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    /* 确保整体绝对居中 */
+    max-width: 1000px;
+    /* 核心魔法：把原来限制的 400px 彻底放宽，让文字舒展开填满画面 */
+    width: 100%;
+    padding: 0 20px;
+    /* 加深阴影，让文字在复杂的树林背景中像刻上去一样清晰 */
+    text-shadow: 0px 4px 25px rgba(0, 0, 0, 0.95);
 }
 
 .content button {
@@ -146,20 +142,7 @@ body {
 }
 
 /* --- 新增：摄影师名字的专属高级排版 --- */
-.content .author-name {
-    display: block;
-    font-size: 0.85rem;
-    /* 较小的精致字号 */
-    letter-spacing: 4px;
-    /* 宽阔的字间距，这是提升高级感的秘诀！ */
-    text-transform: uppercase;
-    /* 自动转换为全大写字母 */
-    color: #dcd7cb;
-    /* 使用偏暖的浅灰偏金色，显得低调有内涵 */
-    margin-bottom: 15px;
-    /* 和下方大标题拉开一点呼吸感间距 */
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
+
 
 
 /* --- 音乐控制按钮样式 --- */
@@ -229,22 +212,28 @@ body {
     /* --- 核心修复：强制标签内的文字不换行 --- */
     white-space: nowrap;
 }
+
 /* --- 新增：诗词分类的悬浮提示 --- */
 .city-filters span {
-    position: relative; /* 核心：为提示框提供定位参考 */
+    position: relative;
+    /* 核心：为提示框提供定位参考 */
 }
 
 .city-filters span::after {
-    content: attr(data-hint); /* 读取我们在 HTML 里写的英文字 */
+    content: attr(data-hint);
+    /* 读取我们在 HTML 里写的英文字 */
     position: absolute;
-    bottom: -22px; /* 放在文字下方 */
+    bottom: -22px;
+    /* 放在文字下方 */
     left: 50%;
     transform: translateX(-50%);
     font-size: 0.65rem;
     color: #b0a99f;
-    opacity: 0; /* 默认完全透明隐藏 */
+    opacity: 0;
+    /* 默认完全透明隐藏 */
     transition: opacity 0.3s ease, transform 0.3s ease;
-    pointer-events: none; /* 防止鼠标干扰 */
+    pointer-events: none;
+    /* 防止鼠标干扰 */
     white-space: nowrap;
     letter-spacing: 1px;
     font-family: 'Segoe UI', sans-serif;
@@ -461,28 +450,6 @@ button,
         /* 确保按钮也乖乖靠左 */
     }
 
-    .content .author-name {
-        font-size: 0.75rem;
-        letter-spacing: 3px;
-        /* 增加字母间距，提升高级感 */
-        margin-bottom: 12px;
-        color: #dcd7cb;
-    }
-
-    .content h1 {
-        font-size: 2.2rem;
-        /* 标题稍微放大一点点镇住气场 */
-        margin-bottom: 15px;
-        line-height: 1.2;
-    }
-
-    .content p {
-        font-size: 0.85rem;
-        line-height: 1.8;
-        /* 核心：拉大行高，让中文阅读更通透、有呼吸感 */
-        color: #cccccc;
-        margin-bottom: 15px;
-    }
 
     .content button {
         margin-top: 5px;
@@ -528,11 +495,655 @@ button,
 
 .gallery-item img {
     /* 1. Make the image fill the width of its column */
-    width: 100%; 
-    
+    width: 100%;
+
     /* 2. Tell the browser to calculate the height automatically based on the HTML attributes */
-    height: auto; 
-    
+    height: auto;
+
     /* Optional: Keep your background color for loading */
-    background-color: #e0dcd3; 
+    background-color: #e0dcd3;
+}
+
+/* 首屏容器设置为相对定位，为了让内部的绝对定位生效 */
+.hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    /* 撑满整个屏幕高度 */
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* 让内部的 .content 居中显示 */
+}
+
+/* 视频容器设置绝对定位，放在最底层 */
+/* 视频容器设置绝对定位，放在最底层 */
+.video-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    /* 必须是负数，确保在文字层下面 */
+}
+
+/* 核心修复：让里面的两个视频绝对定位，互相重叠 */
+.video-container video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* 保证视频填满整个屏幕 */
+}
+
+/* 半透明遮罩层，让文字更清晰可见 */
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    /* 黑色的40%透明度，可自行调节 */
+    z-index: -1;
+    /* 在视频上，在文字下 */
+}
+
+/* 文字和按钮的内容层 */
+.content {
+    position: relative;
+    /* 确保 z-index 生效 */
+    z-index: 1;
+    /* 必须是正数，确保在最顶层可以被点击和阅读 */
+    text-align: center;
+    color: white;
+    /* 假设你的文字是白色的 */
+    /* ... 保留你原有关于字体大小、间距的 CSS ... */
+}
+
+/* 让缩略图排成一排，固定在首屏底部居中 */
+.slider {
+    position: absolute;
+    bottom: 40px;
+    /* 距离底部的距离，可以自己调 */
+    left: 50%;
+    transform: translateX(-50%);
+    /* 水平居中 */
+    display: flex;
+    gap: 15px;
+    /* 图片之间的间距 */
+    z-index: 10;
+    /* 确保在视频上方 */
+}
+
+/* 精致的相框效果 */
+.slider img.thumbnail {
+    width: 70px;
+    /* 变小一点，不抢戏 */
+    height: 100px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    /* 半透明白色边框 */
+    opacity: 0.6;
+    /* 默认微微透明，融入背景 */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    /* 增加动画过渡，显得顺滑 */
+}
+
+/* 鼠标悬浮时的特效：变清晰、微微上浮、边框变亮 */
+.slider img.thumbnail:hover {
+    opacity: 1;
+    border-color: white;
+    transform: translateY(-10px);
+    /* 往上跳一下 */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
+    /* 增加高级的阴影 */
+}
+
+/* 首屏容器设置（确保你之前的 .hero 样式里有这几行，特别是 relative 和 hidden） */
+.hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 视频容器设置绝对定位，放在最底层 */
+.video-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+}
+
+/* 视频标签撑满容器 */
+.video-container video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* 加深背景遮罩层 */
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* 0.5代表50%的黑色透明度 */
+    z-index: -1;
+}
+
+/* 给文字加上阴影凸显 */
+.content {
+    position: relative;
+    z-index: 1;
+    text-shadow: 0px 2px 10px rgba(0, 0, 0, 0.8);
+}
+
+/* --- 下面是底部悬浮缩略图的核心样式 --- */
+.slider {
+    position: absolute;
+    bottom: 40px;
+    /* 距离底部的距离 */
+    left: 50%;
+    transform: translateX(-50%);
+    /* 水平居中 */
+    display: flex;
+    gap: 15px;
+    /* 图片之间的间距 */
+    z-index: 10;
+    /* 确保在视频上方 */
+}
+
+/* 精致的相框效果 */
+.slider img.thumbnail {
+    width: 70px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    opacity: 0.6;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* 鼠标放上去的高级浮动特效 */
+.slider img.thumbnail:hover {
+    opacity: 1;
+    border-color: white;
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
+}
+
+/* ========================================== */
+/* --- 新增：精选集 (Featured Works) 样式 --- */
+/* ========================================== */
+
+/* 整个精选集区域 */
+.editorial-section {
+    padding: 40px 0 80px 0;
+    /* 调整上下间距 */
+    background-color: transparent;
+    /* 融入你画廊的米色底色 */
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* 顶部大标题 */
+.editorial-title {
+    font-size: 3.5rem;
+    line-height: 1.1;
+    text-align: center;
+    margin-bottom: 80px;
+    letter-spacing: 2px;
+    font-weight: 700;
+    color: #3b3631;
+    /* 适配浅色背景的深色字体 */
+}
+
+/* 左右分栏容器 */
+.editorial-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* 确保左右两边在垂直方向上绝对居中对齐 */
+    gap: 40px;
+    /* 稍微缩小一点点间距，把更多空间留给大图 */
+}
+
+/* --- 左侧：图片区域 --- */
+/* --- 左侧：图片区域（升级留白版） --- */
+.editorial-image-wrapper {
+    flex: 2;
+    /* 核心魔法1：数字越大，照片区占据的屏幕宽度就越广（从1.4提升到了1.8） */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 0;
+    /* 防止巨大的图片把右边文字挤出屏幕 */
+}
+
+editorial-img {
+    max-width: 100%;
+    max-height: 88vh;
+    /* 核心魔法2：放宽高度限制，让竖图最高可以撑到屏幕高度的 88%！ */
+
+    /* 保持紧紧包裹，不留白边 */
+    width: auto;
+    height: auto;
+
+    border-radius: 4px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+}
+
+.editorial-img {
+    max-width: 100%;
+    /* 横图时：最大允许撑满宽度 */
+    max-height: 78vh;
+    /* 竖图时：最大允许撑到屏幕高度的 78% */
+
+    /* 👇 核心魔法：让外框紧紧贴合图片，不留任何多余空白 👇 */
+    width: auto;
+    height: auto;
+
+    border-radius: 4px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+    /* 现在阴影只会完美地打在照片边缘了！ */
+
+    /* 注意：把之前的 object-fit: contain; 删掉，不再需要了 */
+}
+
+/* 极简图注 */
+.image-caption {
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    color: #8a8377;
+    margin-top: 20px;
+    /* 增加一点与照片的距离 */
+    text-transform: uppercase;
+    text-align: center;
+    /* 让图注也居中对齐 */
+}
+
+/* 左侧切换缩略图样式 */
+.editorial-thumbnails {
+    display: flex;
+    justify-content: center;
+    /* 缩略图居中对齐 */
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.ed-thumb {
+    width: 45px;
+    /* 缩略图稍微缩小一点点，更精致 */
+    height: 65px;
+    object-fit: cover;
+    opacity: 0.4;
+    cursor: none;
+    transition: all 0.3s ease;
+    border-bottom: 2px solid transparent;
+    padding-bottom: 5px;
+}
+
+.ed-thumb:hover,
+.ed-thumb.active {
+    opacity: 1;
+    border-bottom: 2px solid #8c6f56;
+}
+
+/* ========================================== */
+/* --- 右侧：文案区域（恢复高级杂志字体排版） --- */
+/* ========================================== */
+
+/* --- 右侧：文案区域（恢复高级杂志字体排版） --- */
+.editorial-text-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* 确保垂直居中 */
+    padding-right: 20px;
+    /* 防止文字贴着屏幕边缘 */
+
+    /* 👇 新增这一行：强行把文字块向上平移 50 像素，与主图实现视觉上的完美居中 👇 */
+    transform: translateY(-50px);
+}
+
+/* 带有左侧修饰线的文字块 */
+.quote-block {
+    position: relative;
+    padding-left: 25px;
+    /* 让文字和线条拉开一点呼吸感 */
+    border-left: 2px solid rgba(140, 111, 86, 0.25);
+    /* 恢复优雅的茶色细线 */
+}
+
+/* 顶部编号 (01, 02...) */
+.quote-number {
+    display: block;
+    font-size: 0.85rem;
+    color: #8c6f56;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* 核心：引言正文 (恢复你最喜欢的斜体宋体) */
+/* 核心：引言正文 (恢复你最喜欢的斜体宋体) */
+.quote {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 1.05rem;
+    /* 👈 把原来的 1.3rem 改成 1.05rem（或者 1rem 也可以，你可以自己看效果调） */
+    line-height: 1.8;
+    margin-bottom: 25px;
+    font-style: italic;
+    color: #555;
+}
+
+/* ========================================== */
+/* --- 电影感开场动画 (Loading & Fade-in) --- */
+/* ========================================== */
+
+/* Loading 遮罩层 */
+#loading-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* 默认居中，如果你想放底部可以改成 flex-end，并加上 padding-bottom */
+    z-index: 5;
+    transition: opacity 1s ease;
+}
+
+/* 闪烁的 Loading 文字 */
+.loading-text {
+    font-family: 'Playfair Display', serif;
+    /* 和菜单完全一致的字体 */
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.8);
+    letter-spacing: 6px;
+    /* 拉开间距，更有大片感 */
+    text-transform: uppercase;
+    /* 强制大写：LOADING... */
+    animation: blink 1.5s infinite;
+}
+
+/* 闪烁动画定义 */
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.3;
+    }
+}
+
+/* --- 文字逐个浮现动画准备 --- */
+/* 初始状态：向下偏移 30px 且透明 */
+.fade-item {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1.2s ease, transform 1.2s ease;
+}
+
+/* 激活状态：回到原位且完全显示 */
+.fade-item.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 游戏风菜单按钮样式 (替代你原本的那个大按钮) */
+/* --- 菜单区域与 CONTINUE 高级胶囊按钮 --- */
+/* --- 菜单区域与 CONTINUE 高级胶囊按钮 --- */
+/* --- 菜单区域与 CONTINUE 高级胶囊按钮 --- */
+
+
+.menu-options button:hover {
+    background: white;
+    color: black;
+    transform: scale(1.03); /* 稍微减小悬停放大的幅度，更低调 */
+}
+
+.menu-options .disabled-btn {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.menu-options .disabled-btn:hover {
+    transform: none;
+    /* 禁用的按钮不移动 */
+}
+
+、
+/* ========================================== */
+/* --- 电影感滚动浮现动画 (Scroll Reveal) --- */
+/* ========================================== */
+
+/* 初始状态：透明，且稍微偏下 60px */
+.reveal-up {
+    opacity: 0;
+    transform: translateY(60px);
+    transition: opacity 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+        transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    /* 使用平滑的贝塞尔曲线，让动画极其柔和 */
+}
+
+/* 激活状态：完全显示，回到原位 */
+.reveal-up.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- 新增：底部视频排版区域 --- */
+.cinematic-videos {
+    padding: 100px 5%;
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+    /* 视频之间的巨大留白 */
+}
+
+.video-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.video-card video {
+    width: 100%;
+    max-width: 900px;
+    /* 限制视频最大宽度，保持电影画幅感 */
+    height: auto;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}
+
+.video-caption {
+    margin-top: 20px;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: #8a8377;
+    letter-spacing: 3px;
+    font-size: 0.9rem;
+}
+
+/* --- 1. 顶部摄影师名字 --- */
+/* ========================================== */
+/* --- 首页首屏专属样式 (绝对隔离，保护详情页) --- */
+/* ========================================== */
+
+/* 1. 顶部摄影师名字 */
+#hero-content .author-name {
+    display: block;
+    font-size: 1rem;
+    letter-spacing: 3px; 
+    margin-bottom: 5px; 
+    color: rgba(255, 255, 255, 0.55); /* 浓度：中等 */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    text-transform: uppercase;
+}
+
+/* 2. 主标题 (只有这里的 Stilled Moments 会变成镂空，文武庙安全了！) */
+#hero-content h1 {
+    font-size: 7.5rem; 
+    line-height: 1.1; 
+    margin-bottom: 10px; 
+    letter-spacing: 2px;
+    color: transparent;
+    -webkit-text-stroke: 1.5px rgba(255, 255, 255, 1); /* 浓度：最高 */
+    text-shadow: none;
+}
+
+/* 3. 中英文正文 */
+#hero-content p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 2px;
+    letter-spacing: 0px; 
+    color: rgba(255, 255, 255, 0.55); /* 浓度：最低，退居二线 */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* 4. 按钮外层间距 */
+#hero-content .menu-options {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px; 
+}
+
+/* 5. 纯净复刻版：经典胶囊幽灵按钮 */
+#hero-content .menu-options button {
+    background-color: transparent; 
+    color: rgba(255, 255, 255, 0.7); /* 字体颜色和边框保持一致 */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+    font-size: 1.15rem; 
+    font-weight: 400; 
+    letter-spacing: 0px; 
+    padding: 12px 45px; /* 帮你调回了完美的扁长胶囊比例 */
+    border: 0.55px solid rgba(255, 255, 255, 0.7); /* 极细边框 */
+    border-radius: 60px; 
+    cursor: pointer;
+    text-transform: none; 
+    transition: background-color 0.4s ease, color 0.4s ease; 
+}
+
+/* 按钮悬停特效 */
+#hero-content .menu-options button:hover {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+/* ========================================== */
+/* --- 终极抢救：详情页 (大图浏览) 专属排版锁定 --- */
+/* ========================================== */
+
+/* 1. 强制外壳：必须是左右分开！ */
+/* ========================================== */
+/* --- 终极完美版：详情页 (大图浏览) 专属排版 --- */
+/* ========================================== */
+
+/* 0. 驱逐隐形元素，防止占位干扰 */
+#detail-section .slider {
+    display: none !important;
+}
+
+/* 1. 强制外壳：左右布局，完美推开 */
+#detail-section {
+    /* display: flex !important;  <-- 把这行删掉，或者注释掉！ */
+    flex-direction: row !important;
+    align-items: center !important;
+    padding: 0 8% !important; /* 左右保留 8% 呼吸空间 */
+}
+
+/* 2. 左侧文字区：锁死 35% 宽度，必须靠左 */
+#detail-section .content {
+    flex: 0 0 35% !important; 
+    max-width: 400px !important;
+    text-align: left !important; 
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+#detail-section .content h1 {
+    font-size: 3.5rem !important;
+    color: #ffffff !important; 
+    -webkit-text-stroke: 0 !important; 
+    text-shadow: none !important;
+    letter-spacing: 2px !important;
+    margin-bottom: 10px !important;
+    line-height: 1.2 !important;
+}
+
+#detail-section .content .author-name {
+    font-size: 0.85rem !important;
+    letter-spacing: 4px !important;
+    color: rgba(255, 255, 255, 0.8) !important;
+    margin-bottom: 8px !important;
+    display: block !important;
+}
+
+#detail-section .content p {
+    font-size: 1rem !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+    letter-spacing: 1px !important;
+}
+
+#detail-section .content button {
+    margin-top: 30px !important;
+    padding: 8px 25px !important;
+    font-size: 0.85rem !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.8) !important;
+    border-radius: 30px !important;
+    background: transparent !important;
+    color: #ffffff !important;
+    letter-spacing: 1px !important;
+    font-weight: 400 !important;
+}
+
+#detail-section .content button:hover {
+    background: #ffffff !important;
+    color: #000000 !important;
+}
+
+/* 3. 右侧图片区：占据剩下所有空间，并在空间内【居中】！ */
+#detail-section .main-photo-container {
+    flex: 1 !important; /* 核心1：霸占右边剩下的所有空间 */
+    height: 85vh !important;
+    display: flex !important;
+    justify-content: center !important; /* 核心2：让图片在这个空间里居中，而不是挤在最右边！ */
+    align-items: center !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+#detail-section .main-photo-container img {
+    max-width: 100% !important;
+    max-height: 100% !important;
+    object-fit: contain !important; 
+    border-radius: 6px !important;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5) !important;
 }
