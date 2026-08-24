@@ -1,7 +1,7 @@
 // --- 电影感开场：控制 Loading 与动画时间线 ---
 document.addEventListener('DOMContentLoaded', () => {
     // 设定 Loading 持续时间 (这里设为 3.5 秒，你可以根据需要调整)
-    const loadingDuration = 4800; 
+    const loadingDuration = 3500; 
 
     setTimeout(() => {
         // 1. 隐藏 Loading 字样
@@ -263,4 +263,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // 找到页面上所有带有 reveal-up 类的元素，开始监视它们
     const revealElements = document.querySelectorAll('.reveal-up');
     revealElements.forEach(el => observer.observe(el));
+});
+
+// --- 调整特定视频的播放速度 ---
+document.addEventListener('DOMContentLoaded', () => {
+    // 找到对应区域（cinematic-videos）里的所有视频
+    const cinematicVideos = document.querySelectorAll('.cinematic-videos video');
+    
+    cinematicVideos.forEach(video => {
+        // 1.0 是原速，0.5 是慢放一半，你可以自己修改这个数字来调到你满意的速度
+        video.playbackRate = 0.5; 
+    });
 });

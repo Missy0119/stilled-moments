@@ -1129,21 +1129,90 @@ editorial-img {
     color: #000000 !important;
 }
 
-/* 3. 右侧图片区：占据剩下所有空间，并在空间内【居中】！ */
+/* 详情页图片：自动贴合真实比例，去除左右虚边框 */
 #detail-section .main-photo-container {
-    flex: 1 !important; /* 核心1：霸占右边剩下的所有空间 */
+    flex: 1 !important;
     height: 85vh !important;
     display: flex !important;
-    justify-content: center !important; /* 核心2：让图片在这个空间里居中，而不是挤在最右边！ */
+    justify-content: center !important;
     align-items: center !important;
     padding: 0 !important;
     margin: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
 }
 
 #detail-section .main-photo-container img {
     max-width: 100% !important;
-    max-height: 100% !important;
-    object-fit: contain !important; 
+    max-height: 85vh !important;
+    width: auto !important;           /* 核心：宽度随原图比例自动收缩 */
+    height: auto !important;          /* 核心：高度随原图比例自适应 */
+    background-color: transparent !important; /* 彻底移除底色 */
     border-radius: 6px !important;
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5) !important;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5) !important; /* 阴影紧贴照片边缘 */
+}
+
+/* ==========================================
+   手机端专属排版优化 (仅在屏幕宽度小于 768px 时生效)
+   ========================================== */
+@media screen and (max-width: 768px) {
+
+    /* --- 1. 修复第一张图：首页文字和按钮重叠/过大的问题 --- */
+    
+    /* 缩小巨大的镂空英文字体，避免超出屏幕边缘 */
+    .hero-title, .stroke-text, h1 { 
+        font-size: 3.5rem !important;  /* 如果还是大，可以改成 2.5rem */
+        line-height: 1.1 !important;
+        margin-bottom: 15px !important;
+    }
+
+    /* 调整首页中文段落的间距，让它呼吸感更好 */
+    .hero-description, .intro-text, p {
+        font-size: 0.9rem !important;
+        padding: 0 20px !important;
+        line-height: 1.6 !important;
+    }
+
+    /* 调整 Continue 和 Play Music 按钮的位置，避免挡住文字 */
+    .hero-buttons, .button-container {
+        margin-top: 30px !important;
+        display: flex !important;
+        flex-direction: column !important; /* 手机上让按钮上下排列更整齐 */
+        align-items: center !important;
+        gap: 15px !important;
+    }
+
+
+    /* --- 2. 修复第二张图：将右侧文字移动到图片下方 --- */
+    
+    /* 找到包含左侧图片和右侧文字的大容器，将其改为上下排列 */
+    .editorial-content, .editorial-container, .content-wrapper {
+        display: flex !important;
+        flex-direction: column !important; /* 关键：强制改为上下排列 */
+        align-items: center !important;
+        padding: 20px 15px !important;
+    }
+
+    /* 让左侧（原本）的图片/缩略图部分占满手机宽度 */
+    .editorial-left, .image-section, .editorial-thumbnails {
+        width: 100% !important;
+        margin-bottom: 30px !important; /* 给下方的文字留出空间 */
+        justify-content: center !important;
+    }
+
+    /* 调整原本在右侧的文字部分，占满宽度并取消左侧的竖线 */
+    .editorial-right, .text-section, .editorial-text {
+        width: 100% !important;
+        padding: 0 !important;
+        border-left: none !important; /* 取消电脑端的左侧边框线 */
+        border-top: 1px solid rgba(0,0,0,0.1) !important; /* 在顶部加一条细线分隔 */
+        padding-top: 20px !important;
+    }
+
+    /* 确保文字在手机上横向舒适阅读 */
+    .editorial-text p {
+        writing-mode: horizontal-tb !important; 
+        text-align: justify !important;
+        letter-spacing: 1px !important;
+    }
 }
