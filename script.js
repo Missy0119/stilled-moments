@@ -1,7 +1,7 @@
 // --- 电影感开场：控制 Loading 与动画时间线 ---
 document.addEventListener('DOMContentLoaded', () => {
     // 设定 Loading 持续时间 (这里设为 3.5 秒，你可以根据需要调整)
-    const loadingDuration = 3500; 
+    const loadingDuration = 3500;
 
     setTimeout(() => {
         // 1. 隐藏 Loading 字样
@@ -98,7 +98,7 @@ function openDetail(imageSrc, title, location, camera) {
     document.getElementById('detail-camera').innerText = camera;
 
     document.getElementById('gallery-section').style.display = 'none';
-    document.getElementById('detail-section').style.display = 'flex'; 
+    document.getElementById('detail-section').style.display = 'flex';
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
@@ -113,7 +113,7 @@ function closeDetail() {
 // --- 5. 核心合并：分类筛选、切歌、卡片点击与小圆圈动画 ---
 // ========================================================
 document.addEventListener('DOMContentLoaded', () => {
-    
+
     const filterBtns = document.querySelectorAll('.city-filters span');
     const galleryItems = document.querySelectorAll('.gallery-item');
     const musicPlayer = document.getElementById('bg-music');
@@ -122,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // A. 分类筛选 & 切歌功能
     filterBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
+        btn.addEventListener('click', function () {
             // 切换选中高亮状态
             filterBtns.forEach(b => b.classList.remove('active'));
             this.classList.add('active');
@@ -131,17 +131,17 @@ document.addEventListener('DOMContentLoaded', () => {
             const selectedCategory = this.getAttribute('data-filter');
             galleryItems.forEach(item => {
                 if (selectedCategory === '全部' || item.getAttribute('data-category') === selectedCategory) {
-                    item.style.display = 'block'; 
+                    item.style.display = 'block';
                 } else {
-                    item.style.display = 'none';  
+                    item.style.display = 'none';
                 }
             });
-            
+
             // 无缝切歌
-            const newMusicSrc = this.getAttribute('data-music'); 
+            const newMusicSrc = this.getAttribute('data-music');
             if (newMusicSrc && musicPlayer.getAttribute('src') !== newMusicSrc) {
                 musicPlayer.src = newMusicSrc;
-                musicPlayer.setAttribute('src', newMusicSrc); 
+                musicPlayer.setAttribute('src', newMusicSrc);
                 musicPlayer.play().then(() => {
                     musicToggleBtn.innerHTML = '⏸ Pause Music';
                 }).catch(e => console.log("切歌需交互", e));
@@ -152,12 +152,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // B. 照片卡片点击放大功能
     galleryItems.forEach(item => {
         // 核心修复：这里移除了强制变成手指的代码，保护了你的小圆圈！
-        item.addEventListener('click', function() {
+        item.addEventListener('click', function () {
             const imgSrc = this.querySelector('img').src;
             const title = this.querySelector('.item-title').innerText;
             const location = this.querySelector('.item-location').innerText;
             const camera = this.querySelector('.item-camera').innerText;
-            
+
             openDetail(imgSrc, title, location, camera);
         });
     });
@@ -185,40 +185,40 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // C. 变色小圆圈跟随与放大动画逻辑（防卡顿优化版）
-    if (customCursor) {
-        let mouseX = 0;
-        let mouseY = 0;
-        let isScheduled = false; // 节拍器状态
+if (customCursor) {
+    let mouseX = 0;
+    let mouseY = 0;
+    let isScheduled = false; // 节拍器状态
 
-        // 1. 鼠标移动时，只记录坐标，不立刻绘制
-        document.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-            
-            // 如果浏览器还没准备好画下一帧，就不强迫它画
-            if (!isScheduled) {
-                // 告诉浏览器：在下一次重绘屏幕时，再更新圆圈位置
-                requestAnimationFrame(() => {
-                    customCursor.style.left = mouseX + 'px';
-                    customCursor.style.top = mouseY + 'px';
-                    isScheduled = false; // 画完了，重置节拍器
-                });
-                isScheduled = true;
-            }
-        });
+    // 1. 鼠标移动时，只记录坐标，不立刻绘制
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
 
-        // 2. 鼠标移入移出的放大效果保持不变
-        const hoverElements = document.querySelectorAll('.gallery-item, button, .thumbnail, .city-filters span');
-
-        hoverElements.forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                customCursor.classList.add('hover-active'); 
+        // 如果浏览器还没准备好画下一帧，就不强迫它画
+        if (!isScheduled) {
+            // 告诉浏览器：在下一次重绘屏幕时，再更新圆圈位置
+            requestAnimationFrame(() => {
+                customCursor.style.left = mouseX + 'px';
+                customCursor.style.top = mouseY + 'px';
+                isScheduled = false; // 画完了，重置节拍器
             });
-            el.addEventListener('mouseleave', () => {
-                customCursor.classList.remove('hover-active'); 
-            });
+            isScheduled = true;
+        }
+    });
+
+    // 2. 鼠标移入移出的放大效果保持不变
+    const hoverElements = document.querySelectorAll('.gallery-item, button, .thumbnail, .city-filters span');
+
+    hoverElements.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            customCursor.classList.add('hover-active');
         });
-    }
+        el.addEventListener('mouseleave', () => {
+            customCursor.classList.remove('hover-active');
+        });
+    });
+}
 
 // --- 杂志风画报：点击缩略图切换大图逻辑 ---
 // --- 杂志风画报：点击缩略图切换大图逻辑 ---
@@ -246,7 +246,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const observerOptions = {
         root: null,
         rootMargin: '0px',
-        threshold: 0.15 
+        threshold: 0.15
     };
 
     const observer = new IntersectionObserver((entries, observer) => {
@@ -269,9 +269,9 @@ document.addEventListener('DOMContentLoaded', () => {
 document.addEventListener('DOMContentLoaded', () => {
     // 找到对应区域（cinematic-videos）里的所有视频
     const cinematicVideos = document.querySelectorAll('.cinematic-videos video');
-    
+
     cinematicVideos.forEach(video => {
         // 1.0 是原速，0.5 是慢放一半，你可以自己修改这个数字来调到你满意的速度
-        video.playbackRate = 0.5; 
+        video.playbackRate = 0.5;
     });
 });

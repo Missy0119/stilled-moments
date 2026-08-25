@@ -922,7 +922,8 @@ editorial-img {
 .menu-options button:hover {
     background: white;
     color: black;
-    transform: scale(1.03); /* 稍微减小悬停放大的幅度，更低调 */
+    transform: scale(1.03);
+    /* 稍微减小悬停放大的幅度，更低调 */
 }
 
 .menu-options .disabled-btn {
@@ -999,21 +1000,23 @@ editorial-img {
 #hero-content .author-name {
     display: block;
     font-size: 1rem;
-    letter-spacing: 3px; 
-    margin-bottom: 5px; 
-    color: rgba(255, 255, 255, 0.55); /* 浓度：中等 */
+    letter-spacing: 3px;
+    margin-bottom: 5px;
+    color: rgba(255, 255, 255, 0.55);
+    /* 浓度：中等 */
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     text-transform: uppercase;
 }
 
 /* 2. 主标题 (只有这里的 Stilled Moments 会变成镂空，文武庙安全了！) */
 #hero-content h1 {
-    font-size: 7.5rem; 
-    line-height: 1.1; 
-    margin-bottom: 10px; 
+    font-size: 7.5rem;
+    line-height: 1.1;
+    margin-bottom: 10px;
     letter-spacing: 2px;
     color: transparent;
-    -webkit-text-stroke: 1.5px rgba(255, 255, 255, 1); /* 浓度：最高 */
+    -webkit-text-stroke: 1.5px rgba(255, 255, 255, 1);
+    /* 浓度：最高 */
     text-shadow: none;
 }
 
@@ -1022,8 +1025,9 @@ editorial-img {
     font-size: 1.1rem;
     line-height: 1.8;
     margin-bottom: 2px;
-    letter-spacing: 0px; 
-    color: rgba(255, 255, 255, 0.55); /* 浓度：最低，退居二线 */
+    letter-spacing: 0px;
+    color: rgba(255, 255, 255, 0.55);
+    /* 浓度：最低，退居二线 */
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
@@ -1032,23 +1036,26 @@ editorial-img {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 30px; 
+    margin-top: 30px;
 }
 
 /* 5. 纯净复刻版：经典胶囊幽灵按钮 */
 #hero-content .menu-options button {
-    background-color: transparent; 
-    color: rgba(255, 255, 255, 0.7); /* 字体颜色和边框保持一致 */
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
-    font-size: 1.15rem; 
-    font-weight: 400; 
-    letter-spacing: 0px; 
-    padding: 12px 45px; /* 帮你调回了完美的扁长胶囊比例 */
-    border: 0.55px solid rgba(255, 255, 255, 0.7); /* 极细边框 */
-    border-radius: 60px; 
+    background-color: transparent;
+    color: rgba(255, 255, 255, 0.7);
+    /* 字体颜色和边框保持一致 */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 1.15rem;
+    font-weight: 400;
+    letter-spacing: 0px;
+    padding: 12px 45px;
+    /* 帮你调回了完美的扁长胶囊比例 */
+    border: 0.55px solid rgba(255, 255, 255, 0.7);
+    /* 极细边框 */
+    border-radius: 60px;
     cursor: pointer;
-    text-transform: none; 
-    transition: background-color 0.4s ease, color 0.4s ease; 
+    text-transform: none;
+    transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 /* 按钮悬停特效 */
@@ -1076,22 +1083,23 @@ editorial-img {
     /* display: flex !important;  <-- 把这行删掉，或者注释掉！ */
     flex-direction: row !important;
     align-items: center !important;
-    padding: 0 8% !important; /* 左右保留 8% 呼吸空间 */
+    padding: 0 8% !important;
+    /* 左右保留 8% 呼吸空间 */
 }
 
 /* 2. 左侧文字区：锁死 35% 宽度，必须靠左 */
 #detail-section .content {
-    flex: 0 0 35% !important; 
+    flex: 0 0 35% !important;
     max-width: 400px !important;
-    text-align: left !important; 
+    text-align: left !important;
     padding: 0 !important;
     margin: 0 !important;
 }
 
 #detail-section .content h1 {
     font-size: 3.5rem !important;
-    color: #ffffff !important; 
-    -webkit-text-stroke: 0 !important; 
+    color: #ffffff !important;
+    -webkit-text-stroke: 0 !important;
     text-shadow: none !important;
     letter-spacing: 2px !important;
     margin-bottom: 10px !important;
@@ -1145,11 +1153,15 @@ editorial-img {
 #detail-section .main-photo-container img {
     max-width: 100% !important;
     max-height: 85vh !important;
-    width: auto !important;           /* 核心：宽度随原图比例自动收缩 */
-    height: auto !important;          /* 核心：高度随原图比例自适应 */
-    background-color: transparent !important; /* 彻底移除底色 */
+    width: auto !important;
+    /* 核心：宽度随原图比例自动收缩 */
+    height: auto !important;
+    /* 核心：高度随原图比例自适应 */
+    background-color: transparent !important;
+    /* 彻底移除底色 */
     border-radius: 6px !important;
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5) !important; /* 阴影紧贴照片边缘 */
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5) !important;
+    /* 阴影紧贴照片边缘 */
 }
 
 /* ==========================================
@@ -1158,60 +1170,77 @@ editorial-img {
 @media screen and (max-width: 768px) {
 
     /* --- 1. 修复第一张图：首页文字和按钮重叠/过大的问题 --- */
-    
+
     /* 缩小巨大的镂空英文字体，避免超出屏幕边缘 */
-    .hero-title, .stroke-text, h1 { 
-        font-size: 3.5rem !important;  /* 如果还是大，可以改成 2.5rem */
+    .hero-title,
+    .stroke-text,
+    h1 {
+        font-size: 3.5rem !important;
+        /* 如果还是大，可以改成 2.5rem */
         line-height: 1.1 !important;
         margin-bottom: 15px !important;
     }
 
     /* 调整首页中文段落的间距，让它呼吸感更好 */
-    .hero-description, .intro-text, p {
+    .hero-description,
+    .intro-text,
+    p {
         font-size: 0.9rem !important;
         padding: 0 20px !important;
         line-height: 1.6 !important;
     }
 
     /* 调整 Continue 和 Play Music 按钮的位置，避免挡住文字 */
-    .hero-buttons, .button-container {
+    .hero-buttons,
+    .button-container {
         margin-top: 30px !important;
         display: flex !important;
-        flex-direction: column !important; /* 手机上让按钮上下排列更整齐 */
+        flex-direction: column !important;
+        /* 手机上让按钮上下排列更整齐 */
         align-items: center !important;
         gap: 15px !important;
     }
 
 
     /* --- 2. 修复第二张图：将右侧文字移动到图片下方 --- */
-    
+
     /* 找到包含左侧图片和右侧文字的大容器，将其改为上下排列 */
-    .editorial-content, .editorial-container, .content-wrapper {
+    .editorial-content,
+    .editorial-container,
+    .content-wrapper {
         display: flex !important;
-        flex-direction: column !important; /* 关键：强制改为上下排列 */
+        flex-direction: column !important;
+        /* 关键：强制改为上下排列 */
         align-items: center !important;
         padding: 20px 15px !important;
     }
 
     /* 让左侧（原本）的图片/缩略图部分占满手机宽度 */
-    .editorial-left, .image-section, .editorial-thumbnails {
+    .editorial-left,
+    .image-section,
+    .editorial-thumbnails {
         width: 100% !important;
-        margin-bottom: 30px !important; /* 给下方的文字留出空间 */
+        margin-bottom: 30px !important;
+        /* 给下方的文字留出空间 */
         justify-content: center !important;
     }
 
     /* 调整原本在右侧的文字部分，占满宽度并取消左侧的竖线 */
-    .editorial-right, .text-section, .editorial-text {
+    .editorial-right,
+    .text-section,
+    .editorial-text {
         width: 100% !important;
         padding: 0 !important;
-        border-left: none !important; /* 取消电脑端的左侧边框线 */
-        border-top: 1px solid rgba(0,0,0,0.1) !important; /* 在顶部加一条细线分隔 */
+        border-left: none !important;
+        /* 取消电脑端的左侧边框线 */
+        border-top: 1px solid rgba(0, 0, 0, 0.1) !important;
+        /* 在顶部加一条细线分隔 */
         padding-top: 20px !important;
     }
 
     /* 确保文字在手机上横向舒适阅读 */
     .editorial-text p {
-        writing-mode: horizontal-tb !important; 
+        writing-mode: horizontal-tb !important;
         text-align: justify !important;
         letter-spacing: 1px !important;
     }
