@@ -1309,9 +1309,9 @@ editorial-img {
         min-height: 100svh;
         height: auto !important;
         flex-direction: column !important;
-        padding: calc(24px + env(safe-area-inset-top)) 20px calc(110px + env(safe-area-inset-bottom)) !important;
+        padding: calc(clamp(72px, 10svh, 120px) + env(safe-area-inset-top)) 20px calc(110px + env(safe-area-inset-bottom)) !important;
         overflow-y: auto !important;
-        justify-content: flex-start !important;
+        justify-content: center !important;
         align-items: center !important;
     }
 
