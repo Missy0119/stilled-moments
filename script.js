@@ -231,7 +231,9 @@ function changeEditorialContent(element, imgSrc, caption, num, quote, author) {
 
     document.getElementById('editorial-num').innerText = num;
 
-    document.getElementById('editorial-quote').innerHTML = quote;
+    const quoteElement = document.getElementById('editorial-quote');
+    quoteElement.classList.toggle('third-quote', num === '03');
+    quoteElement.innerHTML = quote;
 
 
     const thumbs = document.querySelectorAll('.ed-thumb');
