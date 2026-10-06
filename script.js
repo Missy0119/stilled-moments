@@ -247,6 +247,7 @@ function changeEditorialContent(element, imgSrc, caption, num, quote, author) {
 
     const quoteElement = document.getElementById('editorial-quote');
     quoteElement.classList.toggle('third-quote', num === '03');
+    quoteElement.classList.toggle('fourth-quote', num === '04');
     quoteElement.innerHTML = quote;
 
 
